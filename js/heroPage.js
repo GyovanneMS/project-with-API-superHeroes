@@ -24,7 +24,7 @@ const cardHeros = (object) => {
     card.image = heros.images.md;
     card.nome = heros.name;
     card.infos = heros.biography.fullName;
-    card.bgcolor = mudarCor(object.studio);
+    card.bgcolor = mudarCor(object.biography.publisher);
     console.log(`${card.image} ${card.nome} ${card.infos} ${card.bgcolor}`);
     return card;
 }
@@ -44,11 +44,10 @@ const mudarCor = (objectStudio) => {
 const showCards = async () => {
     const conteiner = document.querySelector('main');
     let card = await heroRandom();
-    let teste = cardHeros(card)
-    console.log(teste)
-    //let cardsShow = card.map(cardHeros);
+    console.log(card);
+    let cardsShow = cardHeros(card);
 
-    //conteiner.append(...cardsShow);
+    conteiner.replaceChildren(cardsShow);
 }
 
 showCards()
