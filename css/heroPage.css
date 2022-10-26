@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header{
+    height: 7vh;
+    background-color: #181683;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title{
+    color: #FFFFFF;
+    width: 17%;
+    font-size: 2.5rem;
+    font-weight: lighter;
+    padding-left: 2%;
+}
+
+.button-voltar{
+    width: 15%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding-right: 2%;
+    gap: 10%;
+}
+
+.image-button{
+    height: 49px;
+    width: 55px;
+}
+
+.button-text{
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+main {
+    height: 83vh;
+    width: 100vw;
+    
+}
+
+.grafico-heros{
+    height: 16px;
+}
+
+.nota::-webkit-progress-value{
+    background-color: black;
+}
+
+.nota progress::-webkit-progress-bar{
+    background-color: #EEEFF8;
+    height: 16px;
+}
+
+.blue progress::-webkit-progress-value{
+    background-color: #3347B0;
+    box-shadow: 0px 0px 24px #3347B0;
+}
+
+.valorNota{
+    color: #3347B0;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);;
+}
+
+.yellow progress::-webkit-progress-value{
+    background-color: #E5B657;
+    box-shadow: 0px 0px 24px #E5B657;
+}
+
+.yellow .numeroNota{
+    color: #E5B657;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+
+.red progress::-webkit-progress-value{
+    background-color: #C11010;
+    box-shadow: 0px 0px 24px #C11010;
+}
+
+.red .numeroNota{
+    color: #C11010;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}

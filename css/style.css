@@ -1,0 +1,48 @@
+
+.logo{
+    height: 60px;
+}
+
+.search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.buscar{
+    background-color:#2F4F4F;
+    border:solid 1px;
+    border-radius:15px;
+    width:300px;
+}
+  
+.buscarCard{
+    float:left;
+    background-color:transparent;
+    padding-left:5px;
+    font-style:italic;
+    font-size:18px;
+    border:none;
+    height:32px;
+    width:260px;
+}
+
+.buscarImage{
+    height: 32px;
+    filter: invert(100%);
+}
+
+select{
+    height: 25px;
+    border-radius: 30px;
+    border: none;
+    background-color: var(--color-bg-header);
+    color: white;   
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
