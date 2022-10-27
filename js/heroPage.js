@@ -1,31 +1,18 @@
 'use strict'
 
-// import { heroAPI } from "./api.js"
 
-// const createData = () => {
-//     const main = document.querySelector('main')
-//     const profile = document.createElement('div');
-//     profile.innerHTML = `
-//         <img src="${heroAPI.image.md}" alt="${heroAPI.name}" class="image-hero">
-//         <span class="hero-name">${heroAPI.name}</span>
-//     `;
-//     main.appendChild(profile)
-// }
-// createData()
-
-// showCards()
-//import './card-aluno.js' 
-import { heroRandom } from './api.js'
+import './heroCards.js' 
+import { heroRandom, heroAll } from './api.js'
 
 
 const cardHeros = (object) => {
     const heros = object;
     const card = document.createElement('card-aluno');
-    card.image = heros.images.md;
+    card.image = heros.images.sm;
     card.nome = heros.name;
+    card.studio = heros.biography.publisher;
     card.infos = heros.biography.fullName;
     card.bgcolor = mudarCor(object.biography.publisher);
-    console.log(`${card.image} ${card.nome} ${card.infos} ${card.bgcolor}`);
     return card;
 }
 
@@ -37,17 +24,34 @@ const mudarCor = (objectStudio) => {
     } else if ( studio == "DC Comics"){
         return '#0277FB';
     } else if (studio == "Shueisha"){
-        return '#800000';
+        return '#FFFF00';
+    } else if (studio == "NBC - Heroes"){
+        return '#622162';
+    } else if (studio == "George Lucas"){
+        return '#ffbf00'
+    } else if (studio == "Star Trek"){
+        return '#f1af09'
+    } else if (studio == "ABC studios"){
+        return '#008b8b'
+    } else if (studio == "IDW Publishing"){
+        return '#0000ae'
+    } else if (studio == "SyFy"){
+        return '#7529ef'
+    }
+    
+    else {
+        return 'green'
     }
 }
 
 const showCards = async () => {
     const conteiner = document.querySelector('main');
-    let card = await heroRandom();
-    console.log(card);
-    let cardsShow = cardHeros(card);
+    let card = await heroAll();
+ 
+    let cardsShow = await card.map(cardHeros)
 
-    conteiner.replaceChildren(cardsShow);
+
+    conteiner.replaceChildren(...cardsShow);
 }
 
 showCards()

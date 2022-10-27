@@ -22,9 +22,10 @@ class card extends HTMLElement {
         this.nome = 'Nome do Aluno';
         this.bgcolor = 'green';
         this.infos = 'Nothing';
+        this.studio = 'Nothing'
     }
     static get observedAttributes() {
-        return ['image', 'nome', 'bgcolor', 'nomeCompleto']
+        return ['image', 'nome', 'bgcolor', 'nomeCompleto', 'studio']
     }
 
     attributeChangedCallback(nameAttr, oldValue, newValue){
@@ -46,28 +47,47 @@ class card extends HTMLElement {
     styles(){
         const style = document.createElement('style');
         style.textContent = `
+
             .card{
-                width: 375px;
-                height: 330px;
+                width: 250px;
+                height: 300px;
                 background-color: ${this.bgcolor};
                 display: grid;
-                grid-template-rows: 20% 60% 20%;
+                grid-template-rows: 60% 20% 20%;
                 place-items: center;
+                transition: 2s;
             }
+
+            .card:hover{
+                transform: scale(1.1);
+            }
+
             .card__image{
                 width: 100%;
+                height: 100%;
                 background-image: url(${this.image});
                 background-size: cover;
                 backgorund-color: cyan;
                 background-position: center;
             }
+
+
+
             .card__nome{
                 color: black;
-                font-size: 3rem;
+                font-size: 1.9rem;
+                display: flex;
+                text-align: center;
             }
+
             .card__infos{
                 color: black;
+                display: flex;
+                flex-direction: column;           
+                text-align: center;
+                flex-wrap: wrap;
             }
+
         `
         return style
     }
@@ -78,7 +98,7 @@ class card extends HTMLElement {
         card.innerHTML = `
             <div class="card__image"></div>
             <div class="card__nome"> ${this.nome} </div>
-            <div class="card__infos">${this.infos}</div>
+            <div class="card__infos"><span>${this.infos}</span><span>${this.studio}</span></div>
         `
         return card
     }
