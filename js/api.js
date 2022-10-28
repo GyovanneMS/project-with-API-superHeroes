@@ -15,7 +15,7 @@ const heroAll = async () => {
 const heroRandom  = async () => {
     let random = Math.floor(Math.random() * 731);
     random =+ 1;
-    return heroById(random);
+    return heroById(random); 
 }
 
 export { heroById, heroAll, heroRandom }

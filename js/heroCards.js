@@ -49,17 +49,20 @@ class card extends HTMLElement {
         style.textContent = `
 
             .card{
-                width: 250px;
-                height: 300px;
-                background-color: ${this.bgcolor};
+                width: 300px;
+                height: 350px;
+                background-color: #${this.bgcolor};
                 display: grid;
                 grid-template-rows: 60% 20% 20%;
                 place-items: center;
+                border-radius: 15px;
                 transition: 2s;
+                text-decoration: none;
             }
 
             .card:hover{
                 transform: scale(1.1);
+                border-radius: 35px;
             }
 
             .card__image{
@@ -69,9 +72,13 @@ class card extends HTMLElement {
                 background-size: cover;
                 backgorund-color: cyan;
                 background-position: center;
+                border-radius: 15px 15px 0 0;
+                transition: 2s;
             }
 
-
+            .card:hover .card__image{
+                border-radius: 35px 35px 0 0;
+            }
 
             .card__nome{
                 color: black;
@@ -93,8 +100,9 @@ class card extends HTMLElement {
     }
 
     component() {
-        const card = document.createElement('div');
+        const card = document.createElement('a');
         card.classList.add('card')
+        card.href = './pages/heropage.html'
         card.innerHTML = `
             <div class="card__image"></div>
             <div class="card__nome"> ${this.nome} </div>

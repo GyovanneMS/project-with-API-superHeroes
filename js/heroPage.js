@@ -13,6 +13,9 @@ const cardHeros = (object) => {
     card.studio = heros.biography.publisher;
     card.infos = heros.biography.fullName;
     card.bgcolor = mudarCor(object.biography.publisher);
+    card.setAttribute('id', `${object.id}`)
+    card.onclick = abrir
+    console.log(card.href);
     return card;
 }
 
@@ -20,28 +23,31 @@ const mudarCor = (objectStudio) => {
     let studio = objectStudio;
 
     if(studio == "Marvel Comics"){
-        return '#ED1D24';
+        return 'ED1D24';
     } else if ( studio == "DC Comics"){
-        return '#0277FB';
+        return '0277FB';
     } else if (studio == "Shueisha"){
-        return '#FFFF00';
+        return 'FFFF00';
     } else if (studio == "NBC - Heroes"){
-        return '#622162';
+        return '622162';
     } else if (studio == "George Lucas"){
-        return '#ffbf00'
+        return 'ffbf00'
     } else if (studio == "Star Trek"){
-        return '#f1af09'
+        return 'f1af09'
     } else if (studio == "ABC studios"){
-        return '#008b8b'
+        return '008b8b'
     } else if (studio == "IDW Publishing"){
-        return '#0000ae'
+        return '0000ae'
     } else if (studio == "SyFy"){
-        return '#7529ef'
+        return '7529ef'
+    } else {
+        return '008000'
     }
-    
-    else {
-        return 'green'
-    }
+}
+
+const abrir = (card) => {
+    const idHero = card.currentTarget.id
+    localStorage.setItem('idHero', idHero)
 }
 
 const showCards = async () => {
