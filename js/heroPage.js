@@ -39,6 +39,8 @@ const mudarCor = (objectStudio) => {
         return '0000ae'
     } else if (studio == "SyFy"){
         return '7529ef'
+    }else if (studio == "Dark Horse Comics"){
+        return 'D3D0B9'
     } else {
         return '008000'
     }
