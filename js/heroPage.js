@@ -14,8 +14,7 @@ const cardHeros = (object) => {
     card.infos = heros.biography.fullName;
     card.bgcolor = mudarCor(object.biography.publisher);
     card.setAttribute('id', `${object.id}`)
-    card.onclick = abrir
-    console.log(card.href);
+    card.onclick = abrir;
     return card;
 }
 
@@ -48,6 +47,7 @@ const mudarCor = (objectStudio) => {
 const abrir = (card) => {
     const idHero = card.currentTarget.id
     localStorage.setItem('idHero', idHero)
+    console.log(localStorage.getItem('idHero'));
 }
 
 const showCards = async () => {

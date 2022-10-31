@@ -18,4 +18,13 @@ const heroRandom  = async () => {
     return heroById(random); 
 }
 
-export { heroById, heroAll, heroRandom }
+const heroPowerStars = async (id) => {
+    const url = `https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/powerstats/${id}.json`;
+    const response = await fetch(url);
+    const dadosHero = await response.json()
+    return dadosHero;
+}
+
+
+//
+export { heroById, heroAll, heroRandom, heroPowerStars }
