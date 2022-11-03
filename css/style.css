@@ -46,6 +46,7 @@ select{
 }
 
 main{
+    background-color: black;
     min-height: 83vh;
     padding: 20px;
     gap: 20px;
@@ -53,4 +54,8 @@ main{
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.hide {
+    display: none;
 }

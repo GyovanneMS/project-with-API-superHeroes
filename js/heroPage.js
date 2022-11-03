@@ -49,7 +49,25 @@ const mudarCor = (objectStudio) => {
 const abrir = (card) => {
     const idHero = card.currentTarget.id
     localStorage.setItem('idHero', idHero)
-    console.log(localStorage.getItem('idHero'));
+}
+
+const filter = (item) => {
+    const status = document.getElementById('studiosHeroes').value
+    if (item.studio != status) {
+        item.classList.add('hide')
+    }
+    else {
+        item.classList.remove('hide')
+    }
+    return item
+}
+
+const filtro = async () => {
+    const conteiner = document.querySelector('main');
+    let card = await heroAll();
+    let cardsShow = card.map(cardHeros);
+    let cardsCertos = cardsShow.map(filter)
+    conteiner.replaceChildren(...cardsCertos);
 }
 
 const showCards = async () => {
@@ -62,4 +80,5 @@ const showCards = async () => {
     conteiner.replaceChildren(...cardsShow);
 }
 
+document.getElementById('studiosHeroes').addEventListener('change', filtro)
 showCards()
