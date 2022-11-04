@@ -6,6 +6,7 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
 }
 
 header{
@@ -145,7 +146,7 @@ main {
 }
 
 .value::-webkit-progress-value{
-    background-color: black;
+    background-color: #3347B0;
 }
 
 .value progress::-webkit-progress-bar{

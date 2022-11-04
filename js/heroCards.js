@@ -19,7 +19,7 @@ class card extends HTMLElement {
         super();
         this.shadow  = this.attachShadow({mode:'open'});
         this.image = 'https://d5y9g7a5.rocketcdn.me/wp-content/uploads/2020/04/girafa-caracteristicas-e-comportamento-da-especie-1.jpg';
-        this.nome = 'Nome do Aluno';
+        this.nome = 'Nome do Herói';
         this.bgcolor = 'green';
         this.infos = 'Nothing';
         this.studio = 'Nothing'

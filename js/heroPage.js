@@ -14,6 +14,7 @@ const cardHeros = (object) => {
     card.infos = heros.biography.fullName;
     card.bgcolor = mudarCor(object.biography.publisher);
     card.setAttribute('id', `${object.id}`)
+    card.classList = card.nome;
     card.onclick = abrir;
     return card;
 }
@@ -80,5 +81,33 @@ const showCards = async () => {
     conteiner.replaceChildren(...cardsShow);
 }
 
+const search_hero = async () => {
+    let palavra = await document.getElementById('buscarCard').value
+    let heros = await heroAll()
+
+    heros.forEach(element => {
+        if(element.name != palavra){
+            let hero = document.getElementsByClassName(`${element.name}`)
+            hero.classList.add('hide');
+        } else {
+            element
+        }
+    });
+    // nombre = nombre.toLowerCase();
+
+    // let hero = document.getElementsByClassName('card');
+    // hero.nome
+    // if(hero.nome.toLowerCase() == nombre){
+    //     hero.classList.add('hide');
+    // } else {
+    //     item.classList.remove('hide')
+    // }
+}
+
 document.getElementById('studiosHeroes').addEventListener('change', filtro)
+const handleKey = (event) => {
+    if (event.key == 'Enter')
+        search_hero()
+}
+document.getElementById('buscarCard').addEventListener('keypress', handleKey)
 showCards()

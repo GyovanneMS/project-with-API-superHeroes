@@ -10,7 +10,7 @@ const normalInfos = (valorNota) => {
     divNota.innerHTML = `
     <img src="${heroi.images.lg}" alt="" class="hero-img">
     <div class="info-strings">
-        <p class="name">${heroi.name}</p>
+        <p class="name">${heroi.name}</p> 
         <div class="more-infos">
             <div class="nationaly">
                 <p class="raca">Raça: ${heroi.appearance.race}</p>
