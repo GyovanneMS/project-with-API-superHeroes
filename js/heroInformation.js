@@ -1,6 +1,53 @@
 'use strict'
 
-import {heroById, heroPowerStars, heroConnections, heroAll} from './api.js'
+import {heroById, heroPowerStars, heroConnections, heroAll} from './api.js';
+import './heroCards.js' 
+
+const id = async (object) => {
+    const json = await heroById(object);
+    return json
+}
+
+const cardHeros = async (object) => {
+    const heros = object;
+    const hero = await id(heros);
+    const card = document.createElement('card-aluno');
+    card.image = hero.images.sm;
+    card.nome = hero.name;
+    card.studio = hero.biography.publisher;
+    card.infos = hero.biography.fullName;
+    card.bgcolor = mudarCor(hero.biography.publisher);
+    card.classList = card.nome;
+    return card;
+}
+
+const mudarCor = (objectStudio) => {
+    let studio = objectStudio;
+
+    if(studio == "Marvel Comics"){
+        return 'ED1D24';
+    } else if ( studio == "DC Comics"){
+        return '0277FB';
+    } else if (studio == "Shueisha"){
+        return 'FFFF00';
+    } else if (studio == "NBC - Heroes"){
+        return '622162';
+    } else if (studio == "George Lucas"){
+        return 'ffbf00'
+    } else if (studio == "Star Trek"){
+        return 'f1af09'
+    } else if (studio == "ABC studios"){
+        return '008b8b'
+    } else if (studio == "IDW Publishing"){
+        return '0000ae'
+    } else if (studio == "SyFy"){
+        return '7529ef'
+    }else if (studio == "Dark Horse Comics"){
+        return 'D3D0B9'
+    } else {
+        return '008000'
+    }
+}
 
 const normalInfos = (valorNota) => {
     let heroi = valorNota;
@@ -64,20 +111,33 @@ const powers = (valorPower) => {
     return divValue
 }
 
-const connectons = (Object, array) => {
+const connectons = (Object, array, idHeroi) => {
     let connectons = Object.groupAffiliation;
     let arrayConnection = connectons.split(', ');
-    let allConections
+    let allConections = [];
+    console.log(connectons);
     array.forEach(element => {
-        console.log(element.connections.groupAffiliation);
+        let connections = element.connections.groupAffiliation.split(', ');
+        connections.forEach(item => {
+            arrayConnection.forEach(conexao => {
+                if(item == conexao){
+                    if (element.id != idHeroi) {
+                        allConections.push(element.id);
+                    }
+                }
+            })
+        });
     });
-}
+
+    return allConections;
+};
 
 const heroInfos = async () => {
     let divNormalInfo = document.querySelector('.normal-infos')
     let divStats = document.querySelector('.grafics')
+    let divFriends = document.querySelector('.friends')
     let idHero = localStorage.getItem('idHero')
-    
+
     let heroBodyJson = await heroById(idHero)
     let heroPowersJson = await heroPowerStars(idHero)
     let heroConnectionsJson = await heroConnections(idHero)
@@ -85,10 +145,15 @@ const heroInfos = async () => {
     let bodyHero = normalInfos(heroBodyJson)
     let powerHero = powers(heroPowersJson)
     let allHeros = await heroAll();
-    let heroConnection = connectons(heroConnectionsJson, allHeros)
-
+    let heroConnection = connectons(heroConnectionsJson, allHeros, idHero)
+    let cardsShow = await Promise.all(heroConnection.map(cardHeros))
+    console.log(cardsShow);
+    const cardsShowSpliced = cardsShow.splice(0, 4);
+    console.log(cardsShowSpliced);
     divNormalInfo.append(bodyHero) 
     divStats.append(powerHero)
+
+    divFriends.replaceChildren(...cardsShowSpliced)
 
 
     // let mA = matriculaAluno.map(nota)

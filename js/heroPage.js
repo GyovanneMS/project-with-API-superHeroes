@@ -71,12 +71,24 @@ const filtro = async () => {
     conteiner.replaceChildren(...cardsCertos);
 }
 
+function get_random (list) {
+    let all = 1;
+    let random = [];
+    while(all == list.length){
+        random.push(Math.floor((Math.random()*list.length)) + 1);
+        all+=1;
+        console.log(random);
+    }
+    console.log(random);
+    return random;
+}
+
 const showCards = async () => {
     const conteiner = document.querySelector('main');
     let card = await heroAll();
- 
+    let randomCards = get_random(card);
+    console.log(randomCards);
     let cardsShow = await card.map(cardHeros)
-
 
     conteiner.replaceChildren(...cardsShow);
 }

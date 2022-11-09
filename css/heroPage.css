@@ -102,9 +102,13 @@ main {
 /*   Grafico  dos atributos    */
 
 .others-information{
-    width: 50vw;
+    width: 60vw;
     height: 100%;
     padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .grafics{
@@ -118,6 +122,8 @@ main {
     font-weight: 700;
     font-size: 1.5rem; 
     background-color: #FFFFFF;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .SuperPower{
@@ -165,8 +171,13 @@ progress::-webkit-progress-value{
 }
 
 .friends{
-    width: 90%;
+    width: 100%;
     height: 750px;
-    background-color: #FFFFFF;
+    gap: 20px;
+    display: flex;
     padding-top: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    align-items: center;
 } 
