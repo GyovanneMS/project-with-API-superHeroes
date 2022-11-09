@@ -22,7 +22,7 @@ header{
     width: 17%;
     font-size: 2.5rem;
     font-weight: lighter;
-    padding-left: 2%;
+    padding-left: 2%; 
 }
 
 .button-voltar{
@@ -46,11 +46,11 @@ header{
 }
 
 main {
-    height: 83vh;
+    min-height: 83vh;
     width: 100vw; 
     display: flex;
     flex-direction: row;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.681);
 }
 
 /*   Informações normais    */
@@ -117,7 +117,7 @@ main {
     line-height: 27px;
     font-weight: 700;
     font-size: 1.5rem; 
-
+    background-color: #FFFFFF;
 }
 
 .SuperPower{
@@ -163,3 +163,10 @@ progress::-webkit-progress-value{
     color: #3347B0;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);;
 }
+
+.friends{
+    width: 90%;
+    height: 750px;
+    background-color: #FFFFFF;
+    padding-top: 200px;
+} 

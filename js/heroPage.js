@@ -84,13 +84,15 @@ const showCards = async () => {
 const search_hero = async () => {
     let palavra = await document.getElementById('buscarCard').value
     let heros = await heroAll()
-
+    
     heros.forEach(element => {
-        if(element.name != palavra){
-            let hero = document.getElementsByClassName(`${element.name}`)
-            hero.classList.add('hide');
+        let hero = document.getElementsByClassName(`${element.name}`)
+        if(!element.name.includes(palavra)){
+            console.log('teste');
+            hero[0].classList.add('hide')
+            console.log(hero.name);
         } else {
-            element
+            hero[0].classList.remove('hide')
         }
     });
     // nombre = nombre.toLowerCase();

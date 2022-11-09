@@ -1,6 +1,6 @@
 'use strict'
 
-import {heroById, heroPowerStars} from './api.js'
+import {heroById, heroPowerStars, heroConnections, heroAll} from './api.js'
 
 const normalInfos = (valorNota) => {
     let heroi = valorNota;
@@ -64,6 +64,15 @@ const powers = (valorPower) => {
     return divValue
 }
 
+const connectons = (Object, array) => {
+    let connectons = Object.groupAffiliation;
+    let arrayConnection = connectons.split(', ');
+    let allConections
+    array.forEach(element => {
+        console.log(element.connections.groupAffiliation);
+    });
+}
+
 const heroInfos = async () => {
     let divNormalInfo = document.querySelector('.normal-infos')
     let divStats = document.querySelector('.grafics')
@@ -71,12 +80,17 @@ const heroInfos = async () => {
     
     let heroBodyJson = await heroById(idHero)
     let heroPowersJson = await heroPowerStars(idHero)
-    console.log(heroPowersJson);
+    let heroConnectionsJson = await heroConnections(idHero)
+
     let bodyHero = normalInfos(heroBodyJson)
     let powerHero = powers(heroPowersJson)
-    console.log(powerHero);
-    divNormalInfo.append(bodyHero)
+    let allHeros = await heroAll();
+    let heroConnection = connectons(heroConnectionsJson, allHeros)
+
+    divNormalInfo.append(bodyHero) 
     divStats.append(powerHero)
+
+
     // let mA = matriculaAluno.map(nota)
     // divCorNotas.append(...mA)
     // divLocalNotas.append(divCorNotas)

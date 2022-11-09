@@ -25,6 +25,11 @@ const heroPowerStars = async (id) => {
     return dadosHero;
 }
 
-
+const heroConnections = async (id) => {
+    const url = `https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/connections/${id}.json`;
+    const response = await fetch(url);
+    const dadosHero = await response.json()
+    return dadosHero;
+}
 //
-export { heroById, heroAll, heroRandom, heroPowerStars }
+export { heroById, heroAll, heroRandom, heroPowerStars, heroConnections }
