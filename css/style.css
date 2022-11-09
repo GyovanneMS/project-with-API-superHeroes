@@ -46,7 +46,6 @@ select{
 }
 
 main{
-    background-color: black;
     min-height: 83vh;
     padding: 20px;
     gap: 20px;

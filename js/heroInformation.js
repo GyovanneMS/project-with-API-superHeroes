@@ -18,7 +18,13 @@ const cardHeros = async (object) => {
     card.infos = hero.biography.fullName;
     card.bgcolor = mudarCor(hero.biography.publisher);
     card.classList = card.nome;
+    card.onclick = abrir;
     return card;
+}
+
+const abrir = (card) => {
+    const idHero = card.currentTarget.id
+    localStorage.setItem('idHero', idHero)
 }
 
 const mudarCor = (objectStudio) => {
