@@ -71,15 +71,10 @@ const filtro = async () => {
     conteiner.replaceChildren(...cardsCertos);
 }
 
-function get_random (list) {
-    let all = 1;
+const get_random = (list) => {
     let random = [];
-
-    while(all == list.length){
-        random.push(Math.floor((Math.random()*list.length)) + 1);
-        all+=1;
-    }
-    console.log(all);
+    let length = list.length;
+    random.push(Math.floor((Math.random()*list.length)) + 1);
     return random;
 }
 
@@ -99,9 +94,7 @@ const search_hero = async () => {
     heros.forEach(element => {
         let hero = document.getElementsByClassName(`${element.name}`)
         if(!element.name.includes(palavra)){
-            console.log('teste');
-            hero[0].classList.add('hide')
-            console.log(hero.name);
+            hero[0].classList.add('hide');
         } else {
             hero[0].classList.remove('hide')
         }

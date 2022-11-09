@@ -58,3 +58,11 @@ main{
 .hide {
     display: none;
 }
+  @media (max-device-width: 700px) {
+     .menu {
+        width:400px;
+     }
+     main {
+        width: 400px;
+    }
+}

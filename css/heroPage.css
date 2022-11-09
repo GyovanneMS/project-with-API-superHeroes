@@ -46,7 +46,7 @@ header{
 }
 
 main {
-    min-height: 83vh;
+    min-height: 80vh;
     width: 100vw; 
     display: flex;
     flex-direction: row;
@@ -171,10 +171,10 @@ main {
     height: 16px;
 }
 
-progress::-webkit-progress-value{
+/* progress::-webkit-progress-value{
     background-color: #3347B0;
     box-shadow: 0px 0px 24px #3347B0;
-}
+} */
 
 .valorStats{
     color: #3347B0;
@@ -192,3 +192,26 @@ progress::-webkit-progress-value{
     justify-items: center;
     align-items: center;
 } 
+@media (min-width: 768px) { 
+    :root {
+      --screenSize: "medium";
+      --containerSize: 750px; 
+    }
+  }
+  
+  /* // Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) { 
+    :root {
+      --screenSize: "large";
+      --containerSize: 970px; 
+    }
+  }
+  
+  /* // Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) { 
+    :root {
+      --screenSize: "extra large";
+      --containerSize: 1170px; 
+    }
+  }
+  

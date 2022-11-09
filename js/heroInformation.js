@@ -115,6 +115,9 @@ const powers = (valorPower) => {
         <progress value="${valorPower.combat}" max=100></progress>
         <div class='valorStats'>Combat</div>
     </div> `
+    
+    //divValue.style.bgcolor(mudarCor(hero.byograph.publisher))
+
     return divValue
 }
 
@@ -122,7 +125,6 @@ const connectons = (Object, array, idHeroi) => {
     let connectons = Object.groupAffiliation;
     let arrayConnection = connectons.split(', ');
     let allConections = [];
-    console.log(connectons);
     array.forEach(element => {
         let connections = element.connections.groupAffiliation.split(', ');
         connections.forEach(item => {
@@ -139,12 +141,49 @@ const connectons = (Object, array, idHeroi) => {
     return allConections;
 };
 
+const get_random = async (list) => {
+    let random = [];
+    random.push(list[Math.floor((Math.random()*list.length)) + 1]);
+    random.push(list[Math.floor((Math.random()*list.length)) + 1]);
+    
+    if(random[0] == random[1]){
+        while(random[0] != random[1]){
+            if(random[0] == random[1]){
+                random[1] == random.push(Math.floor((Math.random()*list.length)) + 1);
+            }
+        }
+    }
+
+    random.push(list[Math.floor((Math.random()*list.length)) + 1]);
+
+    if(random[0] == random[2] || random[1] == random[2]){
+        while(random[0] != random[2] || random[1] != random[2]){
+            if(random[0] == random[1]){
+                random[1] == random.push(Math.floor((Math.random()*list.length)) + 1);
+            }
+        }
+    }
+
+    random.push(Math.floor((Math.random()*list.length)) + 1);
+
+    if(random[0] == random[3] || random[1] == random[3] || random[2] == random[3]){
+        while(random[0] != random[3] || random[1] != random[3] || random[2] != random[3]){
+            if(random[0] == random[1]){
+                random[1] == random.push(Math.floor((Math.random()*list.length)) + 1);
+            }
+        }
+    }
+
+    
+    return random;
+}
+
 const heroInfos = async () => {
     let divNormalInfo = document.querySelector('.normal-infos')
     let divStats = document.querySelector('.grafics')
     let divFriends = document.querySelector('.friends')
     let idHero = localStorage.getItem('idHero')
-    console.log(idHero);
+    
     let heroBodyJson = await heroById(idHero)
     let heroPowersJson = await heroPowerStars(idHero)
     let heroConnectionsJson = await heroConnections(idHero)
@@ -152,15 +191,16 @@ const heroInfos = async () => {
     let bodyHero = normalInfos(heroBodyJson)
     let powerHero = powers(heroPowersJson)
     let allHeros = await heroAll();
-    let heroConnection = connectons(heroConnectionsJson, allHeros, idHero)
-    let cardsShow = await Promise.all(heroConnection.map(cardHeros))
+    let heroConnection = connectons(heroConnectionsJson, allHeros, idHero);
+    let cardsShow = await Promise.all(heroConnection.map(cardHeros));
     console.log(cardsShow);
-    const cardsShowSpliced = cardsShow.splice(0, 4);
-    console.log(cardsShowSpliced);
+    let randomCard = await get_random(cardsShow);
+    console.log(randomCard);
+    //const cardsShowSpliced = cardsShow.splice(0, 4);
     divNormalInfo.append(bodyHero) 
     divStats.append(powerHero)
 
-    divFriends.replaceChildren(...cardsShowSpliced)
+    divFriends.replaceChildren(...randomCard)
 
 
     // let mA = matriculaAluno.map(nota)
