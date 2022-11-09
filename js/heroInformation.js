@@ -17,6 +17,7 @@ const cardHeros = async (object) => {
     card.studio = hero.biography.publisher;
     card.infos = hero.biography.fullName;
     card.bgcolor = mudarCor(hero.biography.publisher);
+    card.setAttribute('id', `${object.id}`)
     card.classList = card.nome;
     card.onclick = abrir;
     return card;
@@ -143,7 +144,7 @@ const heroInfos = async () => {
     let divStats = document.querySelector('.grafics')
     let divFriends = document.querySelector('.friends')
     let idHero = localStorage.getItem('idHero')
-
+    console.log(idHero);
     let heroBodyJson = await heroById(idHero)
     let heroPowersJson = await heroPowerStars(idHero)
     let heroConnectionsJson = await heroConnections(idHero)
