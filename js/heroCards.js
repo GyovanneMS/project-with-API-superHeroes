@@ -102,7 +102,7 @@ class card extends HTMLElement {
     component() {
         const card = document.createElement('a');
         card.classList.add(`card`)
-        card.href = './heropage.html'
+        card.href = 'heropage.html'
         card.innerHTML = `
             <div class="card__image"></div>
             <div class="card__nome"> ${this.nome} </div>
