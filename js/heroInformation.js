@@ -1,7 +1,7 @@
 'use strict'
 
-import {heroById, heroPowerStars, heroConnections, heroAll} from './api.js';
-import './heroCards.js' 
+import {heroById, heroPowerStars, heroConnections, heroAll, heroBiography} from './api.js';
+import './heroFourCards.js' 
 
 const id = async (object) => {
     const json = await heroById(object);
@@ -24,8 +24,8 @@ const cardHeros = async (object) => {
 }
 
 const abrir = (card) => {
-    const idHero = card.currentTarget.id
-    localStorage.setItem('idHero', idHero)
+    const idHero = card.id;
+    localStorage.setItem('idHero', idHero);
 }
 
 const mudarCor = (objectStudio) => {
@@ -86,42 +86,39 @@ const powers = (valorPower) => {
     divValue.classList.add('SuperPower')
     divValue.innerHTML = `
     <div class="inteligence value">
-        <div class='valorStats numeroStats'>${valorPower.intelligence}</div>
-        <progress value="${valorPower.intelligence}" max=100></progress>
+        <div class='valorStats numeroStats'>${power.intelligence}</div>
+        <progress value="${power.intelligence}" max=100></progress>
         <div class='valorStats'>Intelligence</div>
     </div>
     <div class="strength  value">
-        <div class='valorStats numeroStats'>${valorPower.strength}</div>
-        <progress value="${valorPower.strength}" max=100></progress>
+        <div class='valorStats numeroStats'>${power.strength}</div>
+        <progress value="${power.strength}" max=100></progress>
         <div class='valorStats'>Strength</div>
     </div> 
     <div class="speed value">
-        <div class='valorStats numeroStats'>${valorPower.speed}</div>
-        <progress value="${valorPower.speed}" max=100></progress>
+        <div class='valorStats numeroStats'>${power.speed}</div>
+        <progress value="${power.speed}" max=100></progress>
         <div class='valorStats'>Speed</div>
     </div> 
     <div class="durability value">
-        <div class='valorStats numeroStats'>${valorPower.durability}</div>
-        <progress value="${valorPower.durability}" max=100></progress>
+        <div class='valorStats numeroStats'>${power.durability}</div>
+        <progress value="${power.durability}" max=100></progress>
         <div class='valorStats'>Durability</div>
     </div> 
     <div class="power value">
-        <div class='valorStats numeroStats'>${valorPower.power}</div>
-        <progress value="${valorPower.power}" max=100></progress>
+        <div class='valorStats numeroStats'>${power.power}</div>
+        <progress value="${power.power}" max=100></progress>
         <div class='valorStats'>Power</div>
     </div> 
     <div class="combat value">
-        <div class='valorStats numeroStats'>${valorPower.combat}</div>
-        <progress value="${valorPower.combat}" max=100></progress>
+        <div class='valorStats numeroStats'>${power.combat}</div>
+        <progress value="${power.combat}" max=100></progress>
         <div class='valorStats'>Combat</div>
     </div> `
-    
-    //divValue.style.bgcolor(mudarCor(hero.byograph.publisher))
-
     return divValue
 }
 
-const connectons = (Object, array, idHeroi) => {
+const connectons = (Object, array, idHeroi, publisher) => {
     let connectons = Object.groupAffiliation;
     let arrayConnection = connectons.split(', ');
     let allConections = [];
@@ -129,7 +126,7 @@ const connectons = (Object, array, idHeroi) => {
         let connections = element.connections.groupAffiliation.split(', ');
         connections.forEach(item => {
             arrayConnection.forEach(conexao => {
-                if(item == conexao){
+                if(item == conexao && publisher == element.biography.publisher){
                     if (element.id != idHeroi) {
                         allConections.push(element.id);
                     }
@@ -137,7 +134,6 @@ const connectons = (Object, array, idHeroi) => {
             })
         });
     });
-
     return allConections;
 };
 
@@ -149,7 +145,7 @@ const get_random = async (list) => {
     if(random[0] == random[1]){
         while(random[0] != random[1]){
             if(random[0] == random[1]){
-                random[1] == random.push(Math.floor((Math.random()*list.length)) + 1);
+                random[1] == random.push(list[Math.floor((Math.random()*list.length)) + 1]);
             }
         }
     }
@@ -159,17 +155,17 @@ const get_random = async (list) => {
     if(random[0] == random[2] || random[1] == random[2]){
         while(random[0] != random[2] || random[1] != random[2]){
             if(random[0] == random[1]){
-                random[1] == random.push(Math.floor((Math.random()*list.length)) + 1);
+                random[1] == random.push(list[Math.floor((Math.random()*list.length)) + 1]);
             }
         }
     }
 
-    random.push(Math.floor((Math.random()*list.length)) + 1);
+    random.push(list[Math.floor((Math.random()*list.length)) + 1]);
 
     if(random[0] == random[3] || random[1] == random[3] || random[2] == random[3]){
         while(random[0] != random[3] || random[1] != random[3] || random[2] != random[3]){
             if(random[0] == random[1]){
-                random[1] == random.push(Math.floor((Math.random()*list.length)) + 1);
+                random[1] == random.push(list[Math.floor((Math.random()*list.length)) + 1]);
             }
         }
     }
@@ -178,34 +174,38 @@ const get_random = async (list) => {
     return random;
 }
 
-const heroInfos = async () => {
-    let divNormalInfo = document.querySelector('.normal-infos')
-    let divStats = document.querySelector('.grafics')
-    let divFriends = document.querySelector('.friends')
-    let idHero = localStorage.getItem('idHero')
-    
-    let heroBodyJson = await heroById(idHero)
-    let heroPowersJson = await heroPowerStars(idHero)
+const heroFunctionConnections = async () => {
+    const divFriends = document.querySelector('.friends')
+    const idHero = localStorage.getItem('idHero')
+    //==============
     let heroConnectionsJson = await heroConnections(idHero)
-
-    let bodyHero = normalInfos(heroBodyJson)
-    let powerHero = powers(heroPowersJson)
+    let heroBiographyJson = await heroBiography(idHero)
+    let heroStudio = heroBiographyJson.publisher; 
     let allHeros = await heroAll();
-    let heroConnection = connectons(heroConnectionsJson, allHeros, idHero);
+    //===============
+    let heroConnection = connectons(heroConnectionsJson, allHeros, idHero, heroStudio);
     let cardsShow = await Promise.all(heroConnection.map(cardHeros));
-    console.log(cardsShow);
     let randomCard = await get_random(cardsShow);
-    console.log(randomCard);
-    //const cardsShowSpliced = cardsShow.splice(0, 4);
-    divNormalInfo.append(bodyHero) 
-    divStats.append(powerHero)
-
     divFriends.replaceChildren(...randomCard)
-
-
-    // let mA = matriculaAluno.map(nota)
-    // divCorNotas.append(...mA)
-    // divLocalNotas.append(divCorNotas)
 }
 
-heroInfos()
+const heroFunctionBody = async () => {
+    const idHero = localStorage.getItem('idHero');
+    console.log(idHero);
+    const divNormalInfo = document.querySelector('.normal-infos');
+    let heroBodyJson = await heroById(idHero);
+    let bodyHero = normalInfos(heroBodyJson);
+    divNormalInfo.append(bodyHero);
+}
+
+const heroFunctionPowers = async () => {
+    const idHero = localStorage.getItem('idHero');
+    const divStats = document.querySelector('.grafics');
+    let heroPowersJson = await heroPowerStars(idHero)
+    let powerHero = powers(heroPowersJson)
+    divStats.append(powerHero)
+}
+
+heroFunctionConnections()
+heroFunctionPowers()
+heroFunctionBody()
